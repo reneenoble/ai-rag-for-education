@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "simple-flask-server-appservice",
+	"image": "mcr.microsoft.com/devcontainers/python:3.10-bullseye",
+	"features": {
+		"ghcr.io/azure/azure-dev/azd:latest": {}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Add the IDs of extensions you want installed when the container is created.
+		"extensions": [
+			"ms-python.python",
+			"ms-python.vscode-pylance",
+			"ms-python.black-formatter",
+			"charliermarsh.ruff",
+			"github.vscode-github-actions"
+		],
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"charliermarsh.ruff",
+				"github.vscode-github-actions",
+				"ms-toolsai.jupyter"
+			],
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.testing.pytestEnabled": true,
+				"python.testing.unittestEnabled": false,
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
+				},
+				"python.formatting.provider": "black",
+				"files.exclude": {
+					"**/*.coverage": true,
+					".ruff_cache": true,
+					".pytest_cache": true
+				}
+			}
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8000, 8080, 50505],
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pip install -r requirements.txt"
+}
